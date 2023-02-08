@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MdAddShoppingCart } from "react-icons/md";
 
 import { ProductList } from "./styles";
@@ -42,6 +42,8 @@ const Home = (): JSX.Element => {
           priceFormatted: formatPrice(product.price),
         };
       });
+
+      console.log(data);
 
       setProducts(data);
     }

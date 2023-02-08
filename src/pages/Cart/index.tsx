@@ -12,7 +12,7 @@ import { Container, ProductTable, Total } from "./styles";
 interface Product {
   id: number;
   title: string;
-  price: string;
+  price: number;
   image: string;
   amount: number;
 }
@@ -23,9 +23,12 @@ const Cart = (): JSX.Element => {
   const cartFormatted = cart.map((product) => ({
     id: product.id,
     title: product.title,
-    price: formatPrice(product.price),
+    price: product.price,
     image: product.image,
     amount: product.amount,
+
+    formatedPrice: formatPrice(product.price),
+    subTotal: formatPrice(product.price * product.amount),
   }));
 
   const total = formatPrice(
@@ -66,7 +69,7 @@ const Cart = (): JSX.Element => {
               </td>
               <td>
                 <strong>{product.title}</strong>
-                <span>{product.price}</span>
+                <span>{product.formatedPrice}</span>
               </td>
               <td>
                 <div>
@@ -94,9 +97,7 @@ const Cart = (): JSX.Element => {
                 </div>
               </td>
               <td>
-                <strong>
-                  {Number(product.price) * Number(product.amount)}
-                </strong>
+                <strong>{product.subTotal}</strong>
               </td>
               <td>
                 <button
